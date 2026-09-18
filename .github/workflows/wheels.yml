@@ -55,7 +55,7 @@ jobs:
       # 执行自研构建脚本 --keep-tmp 异常时保留临时目录
       - name: Build protected wheel (keep tmp for debug)
         working-directory: demo
-        run: python -m py2pydso package -m lyzqt -o ../wheelhouse --no-compile
+        run: python -m py2pydso package -m lyzqt -o ../wheelhouse --pyi
 
       # 跨平台打印wheel列表
       - name: Print all built wheels in wheelhouse
@@ -113,3 +113,8 @@ jobs:
         run: |
           python -m pip install --upgrade twine
           twine upload --repository-url https://packages.aliyun.com/60b5e1fcdbbed34fe0f0a580/pypi/repo-wgnku dist/*
+      
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist
