@@ -105,14 +105,6 @@ jobs:
         run: |
           mkdir -p dist
           find artifacts -name "*.whl" -exec cp {} dist/ \;
-
-      - name: Publish to product
-        env:
-          TWINE_USERNAME: ${{ secrets.REPO_USERNAME }}
-          TWINE_PASSWORD: ${{ secrets.REPO_PASSWORD }}
-        run: |
-          python -m pip install --upgrade twine
-          twine upload --repository-url https://packages.aliyun.com/60b5e1fcdbbed34fe0f0a580/pypi/repo-wgnku dist/*
       
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
